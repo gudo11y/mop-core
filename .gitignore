@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 # Tanka
 tanka/vendor
+
+# Titl
+.tilt
