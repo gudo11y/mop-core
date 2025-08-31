@@ -28,11 +28,7 @@ local_resource(
     deps=jsonnet_deps,
 )
 
-k8s_resource(
-    workload='backstage',
-    port_forwards=[
-        port_forward(7007,7007, name='backstage')
-    ]
-)
-
-k8s_yaml(out_file)
+if os.path.exists(out_file):
+    k8s_yaml(out_file)
+else:
+    print("File {out_file} does not exist, skipping...".format(out_file=out_file))
