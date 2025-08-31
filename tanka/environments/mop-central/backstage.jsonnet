@@ -8,7 +8,7 @@ local common = import 'common.libsonnet';
         chart='./charts/backstage',
         conf={
             namespace: common.namespace,
-            values: {
+            values+: {
 
             }
         })
