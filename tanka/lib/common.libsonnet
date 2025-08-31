@@ -1,38 +1,38 @@
 {
-    namespace:: 'mop',
+  namespace:: 'mop',
 
-    defaults:: {
-        kps:: {
-
-        },
-
-        mimir:: {
-
-        },
-
-        loki:: {
-
-        },
-
-        alloy:: {
-
-        },
-
-        tempo:: {
-
-        },
+  defaults:: {
+    kps:: {
 
     },
 
-    central:: {
+    mimir:: {
 
     },
 
-    cloud:: {
+    loki:: {
 
     },
 
-    edge:: {
+    alloy:: {
 
     },
+
+    tempo:: {
+
+    },
+
+  },
+
+  central:: {
+
+  },
+
+  cloud:: {
+
+  },
+
+  edge:: {
+
+  },
 }

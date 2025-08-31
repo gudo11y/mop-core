@@ -1,35 +1,35 @@
 local common = import 'common.libsonnet';
 {
-    ingress:: {
+  ingress:: {
 
-    },
+  },
 
-    grafana:: {
+  grafana:: {
 
-    },
+  },
 
-    mimir:: {
+  mimir:: {
 
-    },
+  },
 
-    loki:: {
+  loki:: {
 
-    },
+  },
 
-    alloy:: {
+  alloy:: {
 
-    },
+  },
 
-    prometheus:: {
+  prometheus:: {
 
-    },
+  },
 
-    alertmanager:: {
+  alertmanager:: {
 
-    },
+  },
 
-    tempo:: {
+  tempo:: {
 
-    },
+  },
 
 }
