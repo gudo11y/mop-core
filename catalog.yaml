@@ -16,7 +16,7 @@ metadata:
       icon: dashboard
       type: admin-dashboard
 spec:
-  type: component
+  type: service
   lifecycle: production
   owner: gudo11y
   system: mop
