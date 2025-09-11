@@ -3,12 +3,12 @@ local helm = tanka.helm.new(std.thisFile);
 local common = import 'common.libsonnet';
 
 {
-  alloy: helm.template(
-    name='alloy',
-    chart='./charts/alloy',
+  grafana: helm.template(
+    name='grafana',
+    chart='./charts/grafana',
     conf={
-      namespace: 'monitoring',
-      values: {
+      namespace: common.namespace,
+      values+: {
 
       },
     }

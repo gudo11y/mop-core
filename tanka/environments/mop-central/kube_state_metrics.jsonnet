@@ -3,16 +3,14 @@ local helm = tanka.helm.new(std.thisFile);
 local common = import 'common.libsonnet';
 
 {
-  kps: helm.template(
-    name='kube-prometheus-stack',
-    chart='./charts/kube-prometheus-stack',
+  kube_state_metrics: helm.template(
+    name='kube-state-metrics',
+    chart='./charts/kube-state-metrics',
     conf={
-      namespace: 'monitoring',
-      values+: common.defaults.kps.values {
+      namespace: common.namespace,
+      values+: {
 
       },
-
-
-    },
+    }
   ),
 }
