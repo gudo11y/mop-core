@@ -1,38 +1,129 @@
 {
-    namespace:: 'mop',
+  namespace:: 'mop',
 
-    defaults:: {
-        kps:: {
+  defaults:: {
+    kps:: {
+      values:: {
+        nameOverride: 'kps',
+        defaultRules+: {
+          rules+:
+            {
+              alertmanager: true,
+              etcd: true,
+              configReloaders: true,
+              general: true,
+              k8sContainerCpuUsageSecondsTotal: true,
+              k8sContainerMemoryCache: true,
+              k8sContainerMemoryRss: true,
+              k8sContainerMemorySwap: true,
+              k8sContainerResource: true,
+              k8sContainerMemoryWorkingSetBytes: true,
+              k8sPodOwner: true,
+              kubeApiserverAvailability: true,
+              kubeApiserverBurnrate: true,
+              kubeApiserverHistogram: true,
+              kubeApiserverSlos: true,
+              kubeControllerManager: true,
+              kubelet: true,
+              kubeProxy: true,
+              kubePrometheusGeneral: true,
+              kubePrometheusNodeRecording: true,
+              kubernetesApps: true,
+              kubernetesResources: true,
+              kubernetesStorage: true,
+              kubernetesSystem: true,
+              kubeSchedulerAlerting: true,
+              kubeSchedulerRecording: true,
+              kubeStateMetrics: true,
+              network: true,
+              node: true,
+              nodeExporterAlerting: true,
+              nodeExporterRecording: true,
+              prometheus: true,
+              prometheusOperator: true,
+              windows: true,
 
+
+            },
         },
-
-        mimir:: {
-
+        alertmanager+: {
+          enabled: true,
         },
-
-        loki:: {
-
+        grafana+: {
+          enabled: true,
         },
-
-        alloy:: {
-
+        'prometheus-node-exporter'+: {
+          enabled: true,
         },
-
-        tempo:: {
-
+        prometheusOperator+: {
+          enabled: true,
         },
+        prometheus+: {
+          agentMode: false,
+          ingress+: {
+            enabled: true,
+            hosts: [
+              'prometheus.gudo11y.local',
+            ],
+          },
+
+          prometheusSpec+: {
+            enableAdminAPI: true,
+
+            ruleNamespaceSelector: '',
+            ruleSelectorNilUsesHelmValues: true,
+            ruleSelector: '',
+
+            serviceMonitorSelectorNilUsesHelmValues: true,
+            serviceMonitorSelector: '',
+            serviceMonitorNamespaceSelector: '',
+
+            podMonitorSelectorNilUsesHelmValues: true,
+            podMonitorSelector: '',
+            podMonitorNamespaceSelector: '',
+
+            probeSelectorNilUsesHelmValues: true,
+            probeSelector: '',
+            probeNamespaceSelector: '',
+
+            scrapeConfigSelectorNilUsesHelmValues: true,
+            scrapeConfigSelector: '',
+            scrapeConfigNamespaceSelector: '',
+
+            retention: '2d',
+          },
+        },
+      },
+    },
+
+    mimir:: {
 
     },
 
-    central:: {
+    loki:: {
 
     },
 
-    cloud:: {
+    alloy:: {
 
     },
 
-    edge:: {
+    tempo:: {
 
     },
+
+  },
+
+  central:: {
+    grafana_domain:: 'grafana.gudo11y.local',
+
+  },
+
+  cloud:: {
+
+  },
+
+  edge:: {
+
+  },
 }

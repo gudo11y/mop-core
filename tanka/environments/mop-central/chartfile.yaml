@@ -13,14 +13,22 @@ requires:
   version: 5.6.0
 - chart: grafana/loki
   version: 6.29.0
-- chart: grafana/alloy
-  version: 1.0.0
+# - chart: grafana/alloy
+#   version: 1.0.0
 - chart: grafana/alloy-operator
-  version: 0.2.2-beta.2
+  version: 0.3.9
 - chart: backstage/backstage
   version: 2.4.1
-- chart: prometheus_community/kube-prometheus-stack
-  version: 70.4.2
+# - chart: prometheus_community/kube-prometheus-stack
+#   version: 70.4.2
 - chart: grafana/tempo-distributed
   version: 1.35.0
+- chart: grafana/grafana
+  version: 9.4.5
+- chart: prometheus_community/kube-state-metrics
+  version: 6.3.0
+- chart: prometheus_community/prometheus-node-exporter
+  version: 4.47.3
+- chart: prometheus_community/prometheus
+  version: 27.37.0
 version: 1
