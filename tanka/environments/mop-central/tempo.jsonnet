@@ -8,7 +8,7 @@ local common = import 'common.libsonnet';
     chart='./charts/tempo-distributed',
     conf={
       namespace: 'monitoring',
-      values: {
+      values+: {
 
       },
     }

@@ -25,10 +25,10 @@ requires:
   version: 1.35.0
 - chart: grafana/grafana
   version: 9.4.5
-- chart: prometheus_community/kube-state-metrics
-  version: 6.3.0
-- chart: prometheus_community/prometheus-node-exporter
-  version: 4.47.3
+# - chart: prometheus_community/kube-state-metrics
+#   version: 6.3.0
+# - chart: prometheus_community/prometheus-node-exporter
+#   version: 4.47.3
 - chart: prometheus_community/prometheus
   version: 27.37.0
 version: 1
