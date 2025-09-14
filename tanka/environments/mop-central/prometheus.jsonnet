@@ -19,6 +19,9 @@ local common = import 'common.libsonnet';
               'prometheus.gudo11y.local',
             ],
           },
+          remoteWrite+: [
+
+          ],
         },
 
       },
