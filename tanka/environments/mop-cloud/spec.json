@@ -2,13 +2,13 @@
   "apiVersion": "tanka.dev/v1alpha1",
   "kind": "Environment",
   "metadata": {
-    "name": "minikube"
+    "name": "mop-cloud"
   },
   "spec": {
     "contextNames": [
-      "minikube"
+      "orbstack"
     ],
-    "namespace": "default",
+    "namespace": "monitoring",
     "resourceDefaults": {},
     "expectVersions": {}
   }
