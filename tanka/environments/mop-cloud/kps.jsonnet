@@ -27,6 +27,18 @@ local common = import 'common.libsonnet';
               disable_login_form: true,
             },
           },
+          additionalDataSources: [
+            {
+              name: 'Loki',
+              type: 'loki',
+              access: 'proxy',
+              url: 'http://loki-gateway.monitoring.svc.cluster.local',
+              isDefault: false,
+              jsonData: {
+                maxLines: 1000,
+              },
+            },
+          ],
         },
       },
     }
