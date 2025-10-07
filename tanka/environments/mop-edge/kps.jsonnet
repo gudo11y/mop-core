@@ -9,6 +9,28 @@ local common = import 'common.libsonnet';
     conf={
       namespace: common.namespace,
       values+: {
+        prometheus+: {
+          ingress+: {
+            enabled: true,
+            hosts: [
+              'prometheus-edge.gudo11y.local',
+            ],
+          },
+          prometheusSpec+: {
+            remoteWrite: [
+              {
+                url: 'http://mimir-nginx.monitoring.svc.cluster.local/api/v1/push',
+                writeRelabelConfigs: [
+                  {
+                    sourceLabels: ['__name__'],
+                    regex: '.*',
+                    action: 'keep',
+                  },
+                ],
+              },
+            ],
+          },
+        },
         grafana+: {
           enabled: true,
           ingress+: {
