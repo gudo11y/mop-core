@@ -7,7 +7,7 @@ local common = import 'common.libsonnet';
     name='loki',
     chart='./charts/loki',
     conf={
-      namespace: 'monitoring',
+      namespace: common.namespace,
       values: {
         deploymentMode: 'SingleBinary',
         loki: {

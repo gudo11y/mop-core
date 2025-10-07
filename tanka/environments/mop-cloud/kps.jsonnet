@@ -7,7 +7,7 @@ local common = import 'common.libsonnet';
     name='kube-prometheus-stack',
     chart='./charts/kube-prometheus-stack',
     conf={
-      namespace: 'monitoring',
+      namespace: common.namespace,
       noHooks: false,
       includeCrds: false,
       values: {
@@ -21,7 +21,7 @@ local common = import 'common.libsonnet';
           prometheusSpec+: {
             remoteWrite: [
               {
-                url: 'http://mimir-nginx.monitoring.svc.cluster.local/api/v1/push',
+                url: 'http://mimir-nginx.mop.svc.cluster.local/api/v1/push',
                 writeRelabelConfigs: [
                   {
                     sourceLabels: ['__name__'],
@@ -56,7 +56,7 @@ local common = import 'common.libsonnet';
               name: 'Loki',
               type: 'loki',
               access: 'proxy',
-              url: 'http://loki-gateway.monitoring.svc.cluster.local',
+              url: 'http://loki-gateway.mop.svc.cluster.local',
               isDefault: false,
               jsonData: {
                 maxLines: 1000,
@@ -66,7 +66,7 @@ local common = import 'common.libsonnet';
               name: 'Tempo',
               type: 'tempo',
               access: 'proxy',
-              url: 'http://tempo.monitoring.svc.cluster.local:3100',
+              url: 'http://tempo.mop.svc.cluster.local:3100',
               isDefault: false,
             },
           ],

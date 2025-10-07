@@ -33,7 +33,7 @@ local alloy = {
           // Remote write to Mimir
           prometheus.remote_write "mimir" {
             endpoint {
-              url = "http://mimir-nginx.monitoring.svc.cluster.local/api/v1/push"
+              url = "http://mimir-nginx.mop.svc.cluster.local/api/v1/push"
 
               queue_config {
                 capacity = 10000

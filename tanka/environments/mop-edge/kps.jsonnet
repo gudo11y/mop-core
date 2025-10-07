@@ -21,7 +21,7 @@ local common = import 'common.libsonnet';
           prometheusSpec+: {
             remoteWrite: [
               {
-                url: 'http://mimir-nginx.monitoring.svc.cluster.local/api/v1/push',
+                url: 'http://mimir-nginx.mop.svc.cluster.local/api/v1/push',
                 writeRelabelConfigs: [
                   {
                     sourceLabels: ['__name__'],

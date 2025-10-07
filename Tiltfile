@@ -46,13 +46,15 @@ local_resource(
 )
 
 # Load the generated YAML so Tilt tracks the resources
-k8s_yaml(out_file)
+k8s_yaml(out_file, allow_duplicates=True)
 
 # Watch for changes in the generated YAML file to trigger reapplication
 watch_file(out_file)
 
 # --- UI links for services ---
 # Add Grafana to Tilt UI with port forward and link
+# Note: These k8s_resource calls will fail on initial load before tk-render completes.
+# Tilt will automatically reload once the YAML file is generated, and then these will work.
 if tk_env == 'mop-central':
     k8s_resource(
         workload='grafana',
@@ -63,19 +65,7 @@ if tk_env == 'mop-central':
         ],
         labels=['observability'],
     )
-else:
-    k8s_resource(
-        workload='kube-prometheus-stack-grafana',
-        port_forwards='3001:80',
-        links=[
-            link('http://localhost:3001', 'Grafana (local)'),
-            link('http://grafana.gudo11y.local', 'Grafana (ingress)'),
-        ],
-        labels=['observability'],
-    )
-
-# Add Backstage to Tilt UI (only in mop-central)
-if tk_env == 'mop-central':
+    # Add Backstage to Tilt UI (only in mop-central)
     k8s_resource(
         workload='backstage',
         port_forwards='7007:7007',
@@ -83,4 +73,16 @@ if tk_env == 'mop-central':
             link('http://localhost:7007', 'Backstage'),
         ],
         labels=['platform'],
+    )
+else:
+    # For mop-edge and mop-cloud, use kube-prometheus-stack Grafana
+    k8s_resource(
+        'kube-prometheus-stack-grafana',
+        new_name='grafana',
+        port_forwards='3001:80',
+        links=[
+            link('http://localhost:3001', 'Grafana (local)'),
+            link('http://grafana.gudo11y.local', 'Grafana (ingress)'),
+        ],
+        labels=['observability'],
     )
