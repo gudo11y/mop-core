@@ -38,6 +38,13 @@ local common = import 'common.libsonnet';
                 maxLines: 1000,
               },
             },
+            {
+              name: 'Tempo',
+              type: 'tempo',
+              access: 'proxy',
+              url: 'http://tempo.monitoring.svc.cluster.local:3100',
+              isDefault: false,
+            },
           ],
         },
       },

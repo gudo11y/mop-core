@@ -2,11 +2,11 @@
   "apiVersion": "tanka.dev/v1alpha1",
   "kind": "Environment",
   "metadata": {
-    "name": "minikube"
+    "name": "mop-edge"
   },
   "spec": {
     "contextNames": [
-      "minikube"
+      "orbstack"
     ],
     "namespace": "mop",
     "resourceDefaults": {},

@@ -13,9 +13,9 @@ local tempo = import 'tempo.jsonnet';
   eso: eso.eso,
   kps: kps.kps,
   loki: loki.loki,
+  tempo: tempo.tempo,
   alloy_operator: alloy_operator.alloy_operator,
   // alloy: alloy.alloy,
-  // tempo: tempo.tempo,
   linkerdCRDs: linkerd.linkerdCRDs,
   linkerdControlPlane: linkerd.linkerdControlPlane,
 }
