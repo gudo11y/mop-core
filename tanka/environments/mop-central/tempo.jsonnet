@@ -9,7 +9,25 @@ local common = import 'common.libsonnet';
     conf={
       namespace: 'monitoring',
       values+: {
-
+        traces: {
+          otlp: {
+            grpc: {
+              enabled: true,
+            },
+            http: {
+              enabled: true,
+            },
+          },
+        },
+        metricsGenerator: {
+          enabled: true,
+          remoteWriteUrl: 'http://prometheus-server.monitoring.svc.cluster.local/api/v1/write',
+        },
+        storage: {
+          trace: {
+            backend: 'local',
+          },
+        },
       },
     }
   ),

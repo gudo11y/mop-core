@@ -9,7 +9,21 @@ local common = import 'common.libsonnet';
     conf={
       namespace: common.namespace,
       values+: {
-
+        tempo: {
+          searchEnabled: true,
+          metricsGenerator: {
+            enabled: true,
+            remoteWriteUrl: 'http://kube-prometheus-stack-prometheus.%s.svc.cluster.local:9090/api/v1/write' % common.namespace,
+          },
+          storage: {
+            trace: {
+              backend: 'local',
+              'local': {
+                path: '/var/tempo/traces',
+              },
+            },
+          },
+        },
       },
     }
   ),
