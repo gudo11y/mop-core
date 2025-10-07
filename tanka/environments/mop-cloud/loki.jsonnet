@@ -9,11 +9,11 @@ local common = import 'common.libsonnet';
     conf={
       namespace: 'monitoring',
       values: {
-        deploymentMode: 'SimpleScalable',
+        deploymentMode: 'SingleBinary',
         loki: {
           auth_enabled: false,
           commonConfig: {
-            replication_factor: 2,
+            replication_factor: 1,
           },
           storage: {
             type: 'filesystem',
@@ -34,16 +34,16 @@ local common = import 'common.libsonnet';
           },
         },
         singleBinary: {
-          replicas: 0,
+          replicas: 1,
         },
         read: {
-          replicas: 2,
+          replicas: 0,
         },
         write: {
-          replicas: 2,
+          replicas: 0,
         },
         backend: {
-          replicas: 2,
+          replicas: 0,
         },
       },
     }
