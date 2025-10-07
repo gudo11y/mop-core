@@ -18,7 +18,7 @@ local common = import 'common.libsonnet';
           storage: {
             trace: {
               backend: 'local',
-              'local': {
+              ['local']: {
                 path: '/var/tempo/traces',
               },
             },
