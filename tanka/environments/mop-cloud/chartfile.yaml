@@ -6,6 +6,10 @@ repositories:
   url: https://grafana.github.io/helm-charts
 - name: prometheus_community
   url: https://prometheus-community.github.io/helm-charts
+- name: linkerd
+  url: https://helm.linkerd.io/stable
+- name: external-secrets
+  url: https://charts.external-secrets.io
 requires:
 - chart: grafana/loki
   version: 6.29.0
@@ -17,4 +21,15 @@ requires:
   version: 70.4.2
 - chart: grafana/tempo
   version: 1.20.0
+- chart: linkerd/linkerd-crds
+  version: 1.8.0
+- chart: linkerd/linkerd-control-plane
+  version: 1.16.11
+# Optional Linkerd extensions (uncomment to enable)
+# - chart: linkerd/linkerd-viz
+#   version: 30.12.11
+# - chart: linkerd/linkerd-multicluster
+#   version: 30.12.11
+- chart: external-secrets/external-secrets
+  version: 0.11.0
 version: 1
