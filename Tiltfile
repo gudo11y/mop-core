@@ -27,3 +27,6 @@ local_resource(
 )
 
 k8s_yaml(out_file)
+
+# --- links to services ---
+link('http://grafana.gudo11y.local', 'Grafana Dashboard')
