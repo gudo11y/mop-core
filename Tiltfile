@@ -34,16 +34,19 @@ if tk_env in ['mop-edge', 'mop-cloud']:
 else:
     tk_apply_deps = ['setup']
 
-# Use local_resource to dynamically apply the Tanka-generated manifests
+# Generate Tanka manifests and load them into Tilt
 local_resource(
-    name='tk-apply',
-    cmd='mkdir -p .tilt && tk show ./tanka/environments/{tk_env} --dangerous-allow-redirect > {out_file} && kubectl apply -f {out_file}'.format(tk_env=tk_env, out_file=out_file),
+    name='tk-render',
+    cmd='mkdir -p .tilt && tk show ./tanka/environments/{tk_env} --dangerous-allow-redirect > {out_file}'.format(tk_env=tk_env, out_file=out_file),
     deps=jsonnet_deps,
     resource_deps=tk_apply_deps,
     auto_init=True,
     trigger_mode=TRIGGER_MODE_AUTO,
     labels=['kubernetes'],
 )
+
+# Load the generated YAML so Tilt tracks the resources
+k8s_yaml(out_file)
 
 # Watch for changes in the generated YAML file to trigger reapplication
 watch_file(out_file)
