@@ -53,6 +53,13 @@ local common = import 'common.libsonnet';
                 url: 'http://tempo-query-frontend.monitoring.svc.cluster.local:3100',
                 isDefault: false,
               },
+              {
+                name: 'Mimir',
+                type: 'prometheus',
+                access: 'proxy',
+                url: 'http://mimir-query-frontend.monitoring.svc.cluster.local:8080/prometheus',
+                isDefault: false,
+              },
             ],
           },
         },

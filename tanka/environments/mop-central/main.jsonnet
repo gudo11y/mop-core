@@ -4,14 +4,19 @@ local common = import 'common.libsonnet';
 local config = import 'config.jsonnet';
 local eso = import 'eso.jsonnet';
 local grafana = import 'grafana.jsonnet';
+local k = import 'k.libsonnet';
 local linkerd = import 'linkerd.jsonnet';
 local loki = import 'loki.jsonnet';
 local mimir = import 'mimir.jsonnet';
 local prometheus = import 'prometheus.jsonnet';
 local tempo = import 'tempo.jsonnet';
 
-{
-  config: config.config,
+config + {
+  namespaces: [
+    k.core.v1.namespace.new(common.namespace),
+    k.core.v1.namespace.new('linkerd'),
+    k.core.v1.namespace.new('monitoring'),
+  ],
   backstage: backstage.backstage,
   eso: eso.eso,
   grafana: grafana.grafana,
