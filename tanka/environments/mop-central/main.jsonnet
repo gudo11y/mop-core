@@ -1,3 +1,4 @@
+local alloy = import 'alloy.jsonnet';
 local alloy_operator = import 'alloy_operator.jsonnet';
 local backstage = import 'backstage.jsonnet';
 local common = import 'common.libsonnet';
@@ -24,6 +25,7 @@ config + {
   loki: loki.loki,
   mimir: mimir.mimir,
   tempo: tempo.tempo,
+  alloy: alloy.alloy,
   alloy_operator: alloy_operator.alloy_operator,
   linkerdCRDs: linkerd.linkerdCRDs,
   linkerdControlPlane: linkerd.linkerdControlPlane,
