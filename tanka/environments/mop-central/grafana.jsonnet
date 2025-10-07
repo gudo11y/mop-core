@@ -25,6 +25,30 @@ local common = import 'common.libsonnet';
             disable_login_form: true,
           },
         },
+        datasources: {
+          'datasources.yaml': {
+            apiVersion: 1,
+            datasources: [
+              {
+                name: 'Prometheus',
+                type: 'prometheus',
+                access: 'proxy',
+                url: 'http://prometheus-server.monitoring.svc.cluster.local',
+                isDefault: true,
+              },
+              {
+                name: 'Loki',
+                type: 'loki',
+                access: 'proxy',
+                url: 'http://loki-gateway.monitoring.svc.cluster.local',
+                isDefault: false,
+                jsonData: {
+                  maxLines: 1000,
+                },
+              },
+            ],
+          },
+        },
       },
     }
   ),

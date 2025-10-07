@@ -11,7 +11,7 @@ local tempo = import 'tempo.jsonnet';
   config: config.config,
   eso: eso.eso,
   kps: kps.kps,
-  // loki: loki.loki,
+  loki: loki.loki,
   // alloy: alloy.alloy,
   // tempo: tempo.tempo,
   linkerdCRDs: linkerd.linkerdCRDs,
