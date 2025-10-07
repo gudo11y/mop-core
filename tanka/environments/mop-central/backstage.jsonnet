@@ -12,22 +12,11 @@ local common = import 'common.libsonnet';
         backstage+: {
           image+: {
             registry: 'localhost:5005',
-            repository: 'backstage/backstage',
+            repository: 'backstage',
             tag: 'latest',
           },
           command: ['node', 'packages/backend'],
           containerPorts+: { backend: 7007 },
-          extraEnvVars: [
-            {
-              name: 'POSTGRES_PASSWORD',
-              valueFrom: {
-                secretKeyRef: {
-                  name: 'backstage-postgresql',
-                  key: 'postgres-password',
-                },
-              },
-            },
-          ],
           appConfig+: {
             app: {
               title: 'Managed Observability Platform',
@@ -51,9 +40,7 @@ local common = import 'common.libsonnet';
                 },
               },
             },
-            integrations: {
-              github: [{ host: 'github.com', apps: [{ '$include': 'github-app-mop-backstage-credentials.yaml' }] }],
-            },
+            integrations: {},
             techdocs: {
               builder: 'local',
               generator: {
@@ -64,19 +51,7 @@ local common = import 'common.libsonnet';
               },
             },
             auth: {
-              providers: {
-                github+: {
-                  development: {
-                    clientId: '${GITHUB_CLIENT_ID}',
-                    clientSecret: '${GITHUB_CLIENT_SECRET}',
-                    signIn: {
-                      resolvers: [{
-                        resolver: 'usernameMatchingUserEntityName',
-                      }],
-                    },
-                  },
-                },
-              },
+              providers: {},
             },
             catalog+: {
               'import': {
@@ -84,61 +59,22 @@ local common = import 'common.libsonnet';
                 pullRequestBranchName: 'backstage-integration',
               },
               rules+: [{ allow: ['Component', 'System', 'API', 'Resource', 'Location'] }],
-              locations+: [
-                {
-                  type: 'file',
-                  target: '../../examples/entities.yaml',
-                },
-                {
-                  type: 'file',
-                  target: '../../examples/template/template.yaml',
-                },
-                {
-                  type: 'file',
-                  target: '../../examples/org.yaml',
-                },
-              ],
-              providers: {
-                githubOrg: {
-                  id: 'githubOrg',
-                  githubUrl: 'https://github.com',
-                  orgs: ['gudo11y'],
-                  schedule: {
-                    initialDelay: { seconds: 30 },
-                    frequency: { seconds: 60 },
-                    timeout: { minutes: 50 },
-                  },
-                },
-                github: {
-                  providerId: {
-                    organization: 'gudo11y',
-                    catalogPath: './catalog-info.yaml',
-                    filters: {
-                      branch: 'main',
-                      repository: '.*',
-                    },
-                    schedule: {
-                      frequency: { minutes: 1 },
-                      timeout: { seconds: 45 },
-                    },
-                  },
-                },
-              },
+              locations+: [],
             },
             kubernetes: {
               serviceLocatorMethod: {
-                type: 'singleTenant',
+                type: 'multiTenant',
               },
               clusterLocatorMethods: [
                 {
                   type: 'config',
                   clusters: [
                     {
-                      url: 'http://127.0.0.1:32846',
-                      name: 'minikube',
+                      url: 'https://kubernetes.default.svc',
+                      name: 'k3d-prod',
                       authProvider: 'serviceAccount',
-                      skipTLSVerify: true,
-                      skipMetricsLookup: true,
+                      skipTLSVerify: false,
+                      skipMetricsLookup: false,
                     },
                   ],
                 },
@@ -148,9 +84,6 @@ local common = import 'common.libsonnet';
               enabled: 'false',
             },
           },
-          extraEnvVarsSecrets: [
-            'github-app-mop-backstage-credentials',
-          ],
         },
         postgresql+: {
           enabled: 'true',
