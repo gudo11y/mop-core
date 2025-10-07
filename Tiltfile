@@ -48,5 +48,36 @@ local_resource(
 # Watch for changes in the generated YAML file to trigger reapplication
 watch_file(out_file)
 
-# --- links to services ---
-link('http://grafana.gudo11y.local', 'Grafana Dashboard')
+# --- UI links for services ---
+# Add Grafana to Tilt UI with port forward and link
+if tk_env == 'mop-central':
+    k8s_resource(
+        workload='grafana',
+        port_forwards='3001:80',
+        links=[
+            link('http://localhost:3001', 'Grafana (local)'),
+            link('http://grafana.gudo11y.local', 'Grafana (ingress)'),
+        ],
+        labels=['observability'],
+    )
+else:
+    k8s_resource(
+        workload='kube-prometheus-stack-grafana',
+        port_forwards='3001:80',
+        links=[
+            link('http://localhost:3001', 'Grafana (local)'),
+            link('http://grafana.gudo11y.local', 'Grafana (ingress)'),
+        ],
+        labels=['observability'],
+    )
+
+# Add Backstage to Tilt UI (only in mop-central)
+if tk_env == 'mop-central':
+    k8s_resource(
+        workload='backstage',
+        port_forwards='7007:7007',
+        links=[
+            link('http://localhost:7007', 'Backstage'),
+        ],
+        labels=['platform'],
+    )
