@@ -6,8 +6,9 @@ metadata:
   labels:
     example.com/custom: custom_label_value
   annotations:
-    example.com/service-discovery: artistweb
-    circleci.com/project-slug: github/example-org/artist-website
+    backstage.io/kubernetes-id: mop-core
+    backstage.io/kubernetes-namespace: mop
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/part-of=mop-core'
   tags:
     - jsonnet
   links:
