@@ -1,5 +1,5 @@
 # --- basics ---
-allow_k8s_contexts('minikube')  # or your context
+allow_k8s_contexts(['minikube', 'k3d-prod', 'orbstack'])
 
 
 # Pick Tanka env via env var: TK_ENV=dev tilt up
@@ -20,13 +20,19 @@ local_resource(
 )
 
 
+# Use local_resource to dynamically apply the Tanka-generated manifests
 local_resource(
-    name='tk-show',
-    cmd='tk show ./tanka/environments/{tk_env} --dangerous-allow-redirect > {out_file}'.format(tk_env=tk_env, out_file=out_file),
+    name='tk-apply',
+    cmd='mkdir -p .tilt && tk show ./tanka/environments/{tk_env} --dangerous-allow-redirect > {out_file} && kubectl apply -f {out_file}'.format(tk_env=tk_env, out_file=out_file),
     deps=jsonnet_deps,
+    resource_deps=['setup'],
+    auto_init=True,
+    trigger_mode=TRIGGER_MODE_AUTO,
+    labels=['kubernetes'],
 )
 
-k8s_yaml(out_file)
+# Watch for changes in the generated YAML file to trigger reapplication
+watch_file(out_file)
 
 # --- links to services ---
 link('http://grafana.gudo11y.local', 'Grafana Dashboard')
