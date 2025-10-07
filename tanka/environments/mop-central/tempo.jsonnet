@@ -7,7 +7,7 @@ local common = import 'common.libsonnet';
     name='tempo',
     chart='./charts/tempo-distributed',
     conf={
-      namespace: 'monitoring',
+      namespace: common.namespace,
       values+: {
         traces: {
           otlp: {
@@ -21,7 +21,7 @@ local common = import 'common.libsonnet';
         },
         metricsGenerator: {
           enabled: true,
-          remoteWriteUrl: 'http://prometheus-server.monitoring.svc.cluster.local/api/v1/write',
+          remoteWriteUrl: 'http://prometheus-server.mop.svc.cluster.local/api/v1/write',
         },
         storage: {
           trace: {

@@ -7,13 +7,13 @@ local common = import 'common.libsonnet';
     name='tempo',
     chart='./charts/tempo',
     conf={
-      namespace: 'monitoring',
+      namespace: common.namespace,
       values: {
         tempo: {
           searchEnabled: true,
           metricsGenerator: {
             enabled: true,
-            remoteWriteUrl: 'http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write',
+            remoteWriteUrl: 'http://kube-prometheus-stack-prometheus.mop.svc.cluster.local:9090/api/v1/write',
           },
           storage: {
             trace: {

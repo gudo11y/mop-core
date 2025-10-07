@@ -7,7 +7,7 @@ local common = import 'common.libsonnet';
     name='alloy-operator',
     chart='./charts/alloy-operator',
     conf={
-      namespace: 'monitoring',
+      namespace: common.namespace,
       values+: {
 
       },

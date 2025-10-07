@@ -7,7 +7,7 @@ local common = import 'common.libsonnet';
     name='mimir',
     chart='./charts/mimir-distributed',
     conf={
-      namespace: 'monitoring',
+      namespace: common.namespace,
       values: {
         mimir: {
           structuredConfig: {
