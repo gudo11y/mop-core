@@ -9,7 +9,22 @@ local common = import 'common.libsonnet';
     conf={
       namespace: common.namespace,
       values+: {
-
+        ingress+: {
+          enabled: true,
+          hosts: [
+            common.central.grafana_domain,
+          ],
+        },
+        // Disable authentication entirely
+        'grafana.ini'+: {
+          'auth.anonymous'+: {
+            enabled: true,
+            org_role: 'Admin',
+          },
+          auth+: {
+            disable_login_form: true,
+          },
+        },
       },
     }
   ),
