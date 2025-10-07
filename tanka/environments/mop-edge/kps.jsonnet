@@ -8,6 +8,8 @@ local common = import 'common.libsonnet';
     chart='./charts/kube-prometheus-stack',
     conf={
       namespace: common.namespace,
+      noHooks: false,
+      includeCrds: false,
       values+: {
         prometheus+: {
           ingress+: {
