@@ -1,4 +1,5 @@
 local alloy = import 'alloy.jsonnet';
+local alloy_operator = import 'alloy_operator.jsonnet';
 local common = import 'common.libsonnet';
 local config = import 'config.jsonnet';
 local eso = import 'eso.jsonnet';
@@ -12,6 +13,7 @@ local tempo = import 'tempo.jsonnet';
   eso: eso.eso,
   kps: kps.kps,
   loki: loki.loki,
+  alloy_operator: alloy_operator.alloy_operator,
   // alloy: alloy.alloy,
   // tempo: tempo.tempo,
   linkerdCRDs: linkerd.linkerdCRDs,
